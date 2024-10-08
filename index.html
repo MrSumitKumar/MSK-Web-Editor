@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MSK Web Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./package/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+
+  <aside>
+    <h2>Settings</h2>
+  </aside>
+
+  <header id="main_header">
+    <div class="editor">
+      <div class="logo">MSK-Web Editor</div>
+      <div class="icons">
+        <a> HTML</a>
+        <a> CSS</a>
+        <a> JS</a>
+        <a href="#" class="fa-solid fa-gear"></a>
+      </div>
+    </div>
+    <div class="preview">
+      Preview:
+      <i onclick="show_internal_preview()" class="fa-solid fa-circle-right left-icon"></i>
+      <a href="#full_preview_container" class="fa-solid fa-expand"></a>
+
+    </div>
+  </header>
+
+  <main>
+    <div id="editors">
+      <div id="html_editor" onkeyup="updateLivePreview()" onclick="html_size()" class="editor"></div>
+      <div id="css_editor" onkeyup="updateLivePreview()" onclick="css_size()" class="editor"></div>
+      <div id="js_editor" onkeyup="updateLivePreview()" onclick="js_size()" class="editor"></div>
+    </div>
+    <div id="separator" role="separator" aria-label="Resizable separator"></div>
+    <div id="preview"> </div>
+  </main>
+
+
+ 
+  <div id="full_preview_container">
+    <header id="full_preview_header">
+      <div class="editor">
+        <div class="logo">MSK-Web Editor</div>
+      </div>
+      <div class="preview">
+        Preview:
+        <a href="#main_header" class="fa-solid fa-compress"></a>
+      </div>
+    </header>
+    <div id="full_preview"> </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
