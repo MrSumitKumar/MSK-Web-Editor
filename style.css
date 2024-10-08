@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-
 ::-webkit-scrollbar {
   display: none;
 }
@@ -12,11 +11,11 @@
 header {
   width: 100%;
   height: 50px;
-  background-color: black;
+  background: linear-gradient(to right, #002060, #FF7F50); /* Gradient colors */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: orange;
+  color: white; /* Change text color to improve visibility */
 
   .editor,
   .preview {
@@ -36,28 +35,22 @@ header {
 
       a {
         display: inline-block;
-        padding: 0 10px;
+        padding: 5px 10px;
         font-size: 18px;
-        color: black;
+        color: white; /* Changed to white for contrast */
         text-align: center;
         text-decoration: none;
-        background-color: orange;
-
+        background: #FF7F50; /* Orange background */
+        border-radius: 5px; /* Rounded corners */
       }
-      .fa-gear {
-        padding: 5px;
-        width: 30px;
-        height: 30px;
-      }
+      
     }
   }
 
   a {
     text-decoration: none;
-    color: orange;
+    color: white; /* Changed link color */
   }
-
-
 }
 
 main {
@@ -67,14 +60,20 @@ main {
   #editors,
   #preview {
     width: 50%;
-    height: 94vh;
-    background-color: #fff;
+    height: 100vh;
+    background-color: #f4f4f4; /* Light background for editors and preview */
+  }
+  
+  #editors>#css_editor,
+  #editors>#js_editor {
+    display: none;
   }
 
   #editors>.editor {
     width: 100%;
-    height: 32%;
-    margin-bottom: 0.5%;
+    height: 100%;
+    border: 1px solid #002060;
+
   }
 
   #editors>.editor.hide {
@@ -100,8 +99,6 @@ main {
 
 @media (max-width: 720px) {
   header>.preview {
-
-
     i.fa-circle-right,
     i.fa-circle-left {
       display: none;
@@ -119,19 +116,14 @@ main {
     #preview {
       display: none;
     }
-
   }
-
-
 }
-
 
 #full_preview {
   height: 100vh;
   width: 100%;
   overflow: scroll;
 }
-
 
 .full_preview>#preview {
   width: 100vw;
@@ -145,7 +137,7 @@ aside {
   width: 25%;
   height: 100vh;
   visibility: hidden;
-  background-color: red;
+  background-color: #002060; /* Sidebar color */
   position: absolute;
   right: 0;
   transform: translateX(100%);
@@ -158,6 +150,7 @@ aside {
     padding: 10px;
     width: 100%;
     height: 55px;
-    background-color: #aaa9a9;
+    background-color: #FF7F50; /* Header background */
+    color: white; /* Header text color */
   }
 }

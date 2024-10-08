@@ -1,9 +1,40 @@
 document.body.style.overflow = 'hidden'
 window.addEventListener('scroll', function () {
   if (window.scrollY >= 1080) {
-      window.scrollTo(0, 1080); 
+    window.scrollTo(0, 1080);
   }
 });
+
+function showEditor(editor) {
+  const htmlEditor = document.getElementById("html_editor");
+  const cssEditor = document.getElementById("css_editor");
+  const jsEditor = document.getElementById("js_editor");
+
+  htmlEditor.style.display = "none";
+  cssEditor.style.display = "none";
+  jsEditor.style.display = "none";
+  
+
+  if (editor === 'html') {
+    htmlEditor.style.display = "block";
+  } else if (editor === 'css') {
+    cssEditor.style.display = "block";
+  } else if (editor === 'js') {
+    jsEditor.style.display = "block";
+  }
+}
+
+document.querySelector('.icons a:nth-child(1)').addEventListener('click', function () {
+  showEditor('html');
+});
+document.querySelector('.icons a:nth-child(2)').addEventListener('click', function () {
+  showEditor('css');
+});
+document.querySelector('.icons a:nth-child(3)').addEventListener('click', function () {
+  showEditor('js');
+});
+
+
 
 function show_internal_preview() {
   const preview_left_icon = document.querySelector('header>.preview>i');
@@ -20,26 +51,9 @@ function show_internal_preview() {
     preview_left.style.width = '50%';
     preview_left.style.display = 'block';
     separator.style.display = 'block';
-    preview_left_icon.classList.replace('fa-circle-left', 'fa-circle-right'); 
+    preview_left_icon.classList.replace('fa-circle-left', 'fa-circle-right');
   }
 }
-
-function html_size() {
-  document.getElementById('html_editor').style.height = "81vh";
-  document.getElementById('css_editor').style.height = "6vh";
-  document.getElementById('js_editor').style.height = "6vh";
-}
-function css_size() {
-  document.getElementById('html_editor').style.height = "6vh";
-  document.getElementById('css_editor').style.height = "81vh";
-  document.getElementById('js_editor').style.height = "6vh";
-}
-function js_size() {
-  document.getElementById('html_editor').style.height = "6vh";
-  document.getElementById('css_editor').style.height = "6vh";
-  document.getElementById('js_editor').style.height = "81vh";
-}
-
 
 
 require.config({ paths: { 'vs': './package/min/vs' } });
@@ -65,49 +79,49 @@ require(['vs/editor/editor.main'], () => {
     base: 'vs-dark', // Using a dark base theme
     inherit: true, // Inherit from the base theme
     rules: [
-        // HTML
-        { token: 'tag', foreground: '569CD6' },                   // HTML tags in blue
-        { token: 'attribute.name', foreground: '4EC9B0' },        // Attribute names in teal
-        { token: 'attribute.value', foreground: 'D19A66' },       // Attribute values in orange
-        { token: 'comment.html', foreground: '6A9955', fontStyle: 'italic' }, // HTML comments in green
-        { token: 'doctype', foreground: 'C678DD' }, // Doctype in purple
+      // HTML
+      { token: 'tag', foreground: '569CD6' },                   // HTML tags in blue
+      { token: 'attribute.name', foreground: '4EC9B0' },        // Attribute names in teal
+      { token: 'attribute.value', foreground: 'D19A66' },       // Attribute values in orange
+      { token: 'comment.html', foreground: '6A9955', fontStyle: 'italic' }, // HTML comments in green
+      { token: 'doctype', foreground: 'C678DD' }, // Doctype in purple
 
-        // CSS
-        { token: 'property.name', foreground: 'FFCC00' }, // CSS property names in yellow
-        { token: 'property.value', foreground: '9CDCFE' }, // CSS property values in light blue
-        { token: 'selector', foreground: 'C586C0' }, // CSS selectors in purple
-        { token: 'comment.css', foreground: '6A9955', fontStyle: 'italic' }, // CSS comments in green
-        { token: 'unit', foreground: 'D19A66' }, // Units like px, em, etc. in orange
-        { token: 'pseudo-class', foreground: 'FFCC00' }, // Pseudo-classes in yellow
+      // CSS
+      { token: 'property.name', foreground: 'FFCC00' }, // CSS property names in yellow
+      { token: 'property.value', foreground: '9CDCFE' }, // CSS property values in light blue
+      { token: 'selector', foreground: 'C586C0' }, // CSS selectors in purple
+      { token: 'comment.css', foreground: '6A9955', fontStyle: 'italic' }, // CSS comments in green
+      { token: 'unit', foreground: 'D19A66' }, // Units like px, em, etc. in orange
+      { token: 'pseudo-class', foreground: 'FFCC00' }, // Pseudo-classes in yellow
 
-        // JavaScript
-        { token: 'keyword.js', foreground: '569CD6', fontStyle: 'bold' }, // JavaScript keywords in blue
-        { token: 'variable.js', foreground: 'D19A66' }, // JavaScript variables in orange
-        { token: 'function.js', foreground: 'C586C0' }, // JavaScript functions in purple
-        { token: 'string.js', foreground: '98C379' }, // JavaScript strings in light green
-        { token: 'comment.js', foreground: '6A9955', fontStyle: 'italic' }, // JavaScript comments in green
-        { token: 'number.js', foreground: 'D19A66' }, // Numbers in orange
-        { token: 'operator.js', foreground: 'FFCC00' }, // Operators in yellow
-        { token: 'boolean.js', foreground: '4EC9B0' }, // Booleans in teal
-        { token: 'error', foreground: 'FF0000', fontStyle: 'bold' }, // Errors in red
-        { token: 'warning', foreground: 'FFA500', fontStyle: 'bold' }, // Warnings in orange
+      // JavaScript
+      { token: 'keyword.js', foreground: '569CD6', fontStyle: 'bold' }, // JavaScript keywords in blue
+      { token: 'variable.js', foreground: 'D19A66' }, // JavaScript variables in orange
+      { token: 'function.js', foreground: 'C586C0' }, // JavaScript functions in purple
+      { token: 'string.js', foreground: '98C379' }, // JavaScript strings in light green
+      { token: 'comment.js', foreground: '6A9955', fontStyle: 'italic' }, // JavaScript comments in green
+      { token: 'number.js', foreground: 'D19A66' }, // Numbers in orange
+      { token: 'operator.js', foreground: 'FFCC00' }, // Operators in yellow
+      { token: 'boolean.js', foreground: '4EC9B0' }, // Booleans in teal
+      { token: 'error', foreground: 'FF0000', fontStyle: 'bold' }, // Errors in red
+      { token: 'warning', foreground: 'FFA500', fontStyle: 'bold' }, // Warnings in orange
     ],
     colors: {
-        'editor.foreground': '#FFFFFF', // Default text color
-        'editor.background': '#1E1E1E', // Background color
-        // 'editorLineNumber.foreground': 'oranged', // Line number color
-        'editor.selectionBackground': '#4E4E4E', // Selection background color
-        'editor.selectionHighlightBackground': '#3E3E3E', // Highlighted selections
-        'editorCursor.foreground': '#FFFFFF', // Cursor color
-        'editorWhitespace.foreground': '#BEBEBE', // Whitespace color
-        'editorIndentGuide.background': '#555555', // Indent guide color
-        'editorError.foreground': '#FF0000', // Error color
-        'editorWarning.foreground': '#FFA500', // Warning color
+      'editor.foreground': '#FFFFFF', // Default text color
+      'editor.background': '#1E1E1E', // Background color
+      // 'editorLineNumber.foreground': 'oranged', // Line number color
+      'editor.selectionBackground': '#4E4E4E', // Selection background color
+      'editor.selectionHighlightBackground': '#3E3E3E', // Highlighted selections
+      'editorCursor.foreground': '#FFFFFF', // Cursor color
+      'editorWhitespace.foreground': '#BEBEBE', // Whitespace color
+      'editorIndentGuide.background': '#555555', // Indent guide color
+      'editorError.foreground': '#FF0000', // Error color
+      'editorWarning.foreground': '#FFA500', // Warning color
     }
-});
+  });
 
-// Set the theme after defining it
-monaco.editor.setTheme('mskInstituteWebTheme');
+  // Set the theme after defining it
+  monaco.editor.setTheme('mskInstituteWebTheme');
 
 
 
