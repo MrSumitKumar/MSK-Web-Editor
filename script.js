@@ -5,6 +5,26 @@ window.addEventListener('scroll', function () {
   }
 });
 
+// Function to reset button styles
+function resetButtonStyles() {
+  const buttons = document.querySelectorAll('.icon-button');
+  buttons.forEach(button => {
+      button.classList.remove('active'); // Remove active class
+  });
+}
+
+// Function to handle button clicks
+function handleButtonClick(event) {
+  resetButtonStyles(); // Reset styles for all buttons
+  event.currentTarget.classList.add('active'); // Set active class for clicked button
+}
+
+// Attach event listeners to buttons
+document.getElementById('htmlButton').addEventListener('click', handleButtonClick);
+document.getElementById('cssButton').addEventListener('click', handleButtonClick);
+document.getElementById('jsButton').addEventListener('click', handleButtonClick);
+
+
 function showEditor(editor) {
   const htmlEditor = document.getElementById("html_editor");
   const cssEditor = document.getElementById("css_editor");
@@ -54,6 +74,7 @@ function show_internal_preview() {
     preview_left_icon.classList.replace('fa-circle-left', 'fa-circle-right');
   }
 }
+
 
 
 require.config({ paths: { 'vs': './package/min/vs' } });
@@ -162,41 +183,46 @@ function createEditorOptions(value, language) {
   };
 };
 
-const html_Options = createEditorOptions('<!DOCTYPE html>\n<html>\n\t<head>\n\t\t<title> Site Name </title>\n\t</head>\n\t<body>\n\n\n\t</body>\n</html>', 'html');
-const css_Options = createEditorOptions('* {\n\tmargin: 0;\n\tpadding: 0;\n\tbox-sizing: border-box;\n}\n', 'css');
-const JS_Options = createEditorOptions('// JavaScript...\n', 'javascript');
+const html_Options = createEditorOptions('', 'html');
+const css_Options = createEditorOptions('', 'css');
+const JS_Options = createEditorOptions('', 'javascript');
 
 
 function changeTheme() {
   const selectedTheme = document.getElementById('theme').value;
   monaco.editor.setTheme(selectedTheme);
 };
+
 // Function to update live preview
 function updateLivePreview() {
   const htmlContent = monaco.editor.getModels()[0].getValue();
   const cssContent = monaco.editor.getModels()[1].getValue();
   const jsContent = monaco.editor.getModels()[2].getValue();
 
+  // Get the live preview frame and full preview tag
   const livePreviewFrame = document.getElementById('preview');
   const full_preview_tag = document.getElementById('full_preview');
-  livePreviewFrame.innerHTML = htmlContent + "<style>" + cssContent + "</style";
-  full_preview_tag.innerHTML = htmlContent + "<style>" + cssContent + "</style";
-  livePreviewFrame.contentWindow.eval(jsContent);
-  full_preview_tag.contentWindow.eval(jsContent);
 
+  // Function to set content in the preview
+  function setPreviewContent(frame, html, css, js) {
+    const doc = frame.contentWindow.document;
+
+    // Open the document
+    doc.open();
+    // Write HTML and CSS into the document
+    doc.write(html + `<style>${css}</style>`);
+    // Write JavaScript into the document
+    const script = doc.createElement('script');
+    script.type = 'text/javascript';
+    script.textContent = js; // Assign JS content as text
+    doc.body.appendChild(script); // Append the script
+    doc.close(); // Close the document
+  }
+
+  // Update both the live preview and the full preview
+  setPreviewContent(livePreviewFrame, htmlContent, cssContent, jsContent);
+  setPreviewContent(full_preview_tag, htmlContent, cssContent, jsContent);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

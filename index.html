@@ -2,21 +2,45 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MSK Web Editor - A powerful online editor for HTML, CSS, and JavaScript. Create and preview your web projects seamlessly with MSK Institute.">
-    <meta name="keywords" content="MSK Web Editor, HTML editor, CSS editor, JavaScript editor, web development, coding, MSK Institute">
-    <meta name="author" content="Sumit Kumar">
-    <link rel="canonical" href="https://msk-web.github.io/editor/">
-    <title>MSK Web Editor - Create, Edit, and Preview Your Web Projects</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="./package/min/vs/loader.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <meta property="og:title" content="MSK Web Editor">
-    <meta property="og:description" content="A powerful online editor for HTML, CSS, and JavaScript at MSK Institute.">
-    <meta property="og:url" content="https://msk-web.github.io/editor/">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://www.mskinstitute.com/images/logo.png"> <!-- Replace with actual image URL -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" sizes="57x57" href="assets/img/app/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="assets/img/app/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/img/app/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/app/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="assets/img/app/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/app/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="assets/img/app/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/img/app/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/app/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/img/app/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/app/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/img/app/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/app/favicon-16x16.png">
+
+  <link rel="manifest" href="/manifest.json">
+
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta name="description"
+    content="MSK Web Editor - A powerful online editor for HTML, CSS, and JavaScript. Create and preview your web projects seamlessly with MSK Institute.">
+  <meta name="keywords"
+    content="MSK Web Editor, HTML editor, CSS editor, JavaScript editor, web development, coding, MSK Institute">
+  <meta name="author" content="Sumit Kumar">
+  <link rel="canonical" href="https://msk-web.github.io/editor/">
+  <title>MSK Web Editor - Create, Edit, and Preview Your Web Projects</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="./package/min/vs/loader.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta property="og:title" content="MSK Web Editor">
+  <meta property="og:description" content="A powerful online editor for HTML, CSS, and JavaScript at MSK Institute.">
+  <meta property="og:url" content="https://msk-web.github.io/editor/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.mskinstitute.com/images/logo.png">
+  <!-- Replace with actual image URL -->
 </head>
 
 <body>
@@ -29,18 +53,18 @@
     <div class="editor">
       <div class="logo">MSK-Web Editor</div>
       <div class="icons">
-        <a href="#">HTML</a>
-        <a href="#">CSS</a>
-        <a href="#">JS</a>
-        <!-- <a href="#" class="fa-solid fa-gear"></a> -->
-      </div>      
+        <a href="#" class="icon-button active" id="htmlButton">HTML</a>
+        <a href="#" class="icon-button" id="cssButton">CSS</a>
+        <a href="#" class="icon-button" id="jsButton">JS</a>
+      </div>
     </div>
     <div class="preview">
-      Preview:
       <i onclick="show_internal_preview()" class="fa-solid fa-circle-right left-icon"></i>
-      <a href="#full_preview_container" class="fa-solid fa-expand"></a>
+      <a onclick="window.scrollTo(0, document.body.scrollHeight  - ( window.innerHeight + 50 ) );">Preview:</a>
     </div>
   </header>
+
+
 
   <main>
     <div id="editors">
@@ -49,28 +73,24 @@
       <div id="js_editor" onkeyup="updateLivePreview()" class="editor"></div>
     </div>
     <div id="separator" role="separator" aria-label="Resizable separator"></div>
-    <div id="preview"> </div>
+    <!-- <div id="preview"> </div> -->
+    <iframe id="preview" style="border: none;"></iframe>
   </main>
 
   <div id="full_preview_container">
     <header id="full_preview_header">
       <div class="editor">
-        <div class="logo">MSK-Web Editor</div>  
-        <div class="icons">
-          <a href="#">HTML</a>
-          <a href="#">CSS</a>
-          <a href="#">JS</a>
-          <!-- <a href="#" class="fa-solid fa-gear"></a> -->
-        </div>        
+        <div class="logo">MSK-Web Editor</div>
       </div>
       <div class="preview">
-        Editor:
-        <a href="#main_header" class="fa-solid fa-compress"></a>
+        <a href="#main_header">Editor:</a>
       </div>
     </header>
-    <div id="full_preview"> </div>
+    <!-- <div id="full_preview"> </div> -->
+    <iframe id="full_preview" style="border: none;"></iframe>
   </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>
